@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+#  app:
+#    build: .
+#    container_name: nestjs-app
+#    ports:
+#      - "3000:3000"  # Прокси порт из контейнера на локальную машину
+#    depends_on:
+#      - postgres
+#    environment:
+#      - DATABASE_HOST=postgres
+#      - DATABASE_PORT=5432
+#      - DATABASE_USERNAME=postgres
+#      - DATABASE_PASSWORD=postgres
+#      - DATABASE_NAME=users_db
+
+  postgres:
+    image: postgres:latest  # Используем официальный образ PostgreSQL
+    container_name: postgres-container  # Указываем имя контейнера для БД
+    environment:
+      POSTGRES_USER: postgres  # Имя пользователя
+      POSTGRES_PASSWORD: sa  # Пароль
+      POSTGRES_DB: for-example  # Название базы данных
+    ports:
+      - "5432:5432"  # Пробрасываем порт PostgreSQL на локальную машину
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Добавляем volume для сохранения данных
+    networks:
+      - mynetwork  # Добавляем в сеть для связи с приложением
+
+volumes:
+  postgres_data:  # Том для хранения данных БД (чтобы они не удалялись при перезапуске контейнера)
+
+networks:
+  mynetwork:  # Создаем кастомную сеть для взаимодействия контейнеров
