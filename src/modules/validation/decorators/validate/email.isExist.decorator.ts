@@ -6,7 +6,7 @@ import {
   ValidatorConstraintInterface,
 } from 'class-validator';
 import { Injectable } from '@nestjs/common';
-import { UserService } from '../../../modules/user/application/user.service';
+import { UserService } from '../../../user/application/user.service';
 
 export function EmailIsExist(
   property?: string,
@@ -23,7 +23,7 @@ export function EmailIsExist(
   };
 }
 
-@ValidatorConstraint({ name: 'EmailIsExist', async: false })
+@ValidatorConstraint({ name: 'EmailIsExist', async: true })
 @Injectable()
 export class EmailIsExistConstraint implements ValidatorConstraintInterface {
   constructor(private readonly userService: UserService) {}

@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsString } from 'class-validator';
-import { Trim } from '../../../../../common/decorators/transform/trim';
+import { Trim } from '../../../../validation/decorators/transform/trim';
 
 export class AuthInput {
   @Trim()

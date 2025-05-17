@@ -35,7 +35,4 @@ export class UserService {
   async emailIsExist(email: string): Promise<boolean> {
     return await this.userRepository.emailIsExist(email);
   }
-  async emailIsValid(email: string): Promise<boolean> {
-    return await this.userRepository.emailIsValid(email);
-  }
 }

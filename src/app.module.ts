@@ -10,11 +10,11 @@ import { ProfileModule } from './modules/profile/profile.module';
 
 @Module({
   imports: [
+    configModule,
     TypeOrmModule.forRoot(options),
     UserModule,
     AuthModule,
     ProfileModule,
-    configModule,
   ],
   controllers: [AppController],
   providers: [AppService],

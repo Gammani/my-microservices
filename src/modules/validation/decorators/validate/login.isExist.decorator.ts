@@ -6,7 +6,7 @@ import {
   ValidatorConstraintInterface,
 } from 'class-validator';
 import { Injectable } from '@nestjs/common';
-import { UserService } from '../../../modules/user/application/user.service';
+import { UserService } from '../../../user/application/user.service';
 
 export function LoginIsExist(
   property?: string,
@@ -23,7 +23,7 @@ export function LoginIsExist(
   };
 }
 
-@ValidatorConstraint({ name: 'LoginIsExist', async: false })
+@ValidatorConstraint({ name: 'LoginIsExist', async: true })
 @Injectable()
 export class LoginIsExistConstraint implements ValidatorConstraintInterface {
   constructor(private readonly userService: UserService) {}

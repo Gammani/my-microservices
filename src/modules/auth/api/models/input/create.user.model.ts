@@ -1,4 +1,4 @@
-import { Trim } from '../../../../../common/decorators/transform/trim';
+import { Trim } from '../../../../validation/decorators/transform/trim';
 import {
   IsNotEmpty,
   IsNumber,
@@ -8,8 +8,8 @@ import {
   Min,
 } from 'class-validator';
 import { Type } from 'class-transformer';
-import { LoginIsExist } from '../../../../../common/decorators/validate/login.isExist.decorator';
-import { EmailIsExist } from '../../../../../common/decorators/validate/email.isExist.decorator';
+import { LoginIsExist } from '../../../../validation/decorators/validate/login.isExist.decorator';
+import { EmailIsExist } from '../../../../validation/decorators/validate/email.isExist.decorator';
 
 export class CreateUserModel {
   @Trim()

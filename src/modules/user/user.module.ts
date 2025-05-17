@@ -8,9 +8,9 @@ import { PasswordAdapter } from '../../shared/adapter/password.adapter';
 import { GetUsersQueryHandler } from './application/queries/get-users.query-handler';
 import { UsersController } from './api/user.controller';
 import { UserService } from './application/user.service';
-import { GetUserHandler } from '../profile/application/queries/get-user.query-handler';
+import { GetUserQueryHandler } from '../profile/application/queries/get-user.query.handler';
 
-const useCases = [GetUsersQueryHandler, CreateUserHandler, GetUserHandler];
+const useCases = [GetUsersQueryHandler, CreateUserHandler, GetUserQueryHandler];
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity]), SharingModule],

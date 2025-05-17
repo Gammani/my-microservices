@@ -6,18 +6,15 @@ import { JwtService } from './application/jwt.secret';
 import { PasswordAdapter } from '../../shared/adapter/password.adapter';
 import { LocalStrategy } from './strategies/local.strategy';
 import { GenerateTokensHandler } from './application/commands/generate-tokens.handler';
-import { LoginIsExistConstraint } from '../../common/decorators/validate/login.isExist.decorator';
-import { EmailIsExistConstraint } from '../../common/decorators/validate/email.isExist.decorator';
 import { JwtAccessTokenGuard } from '../../common/gurad/jwt-accessToken.guard';
+import { ValidationModule } from '../validation/validation.module';
 
 const useCases = [GenerateTokensHandler];
 
 @Module({
-  imports: [SharingModule, UserModule],
+  imports: [SharingModule, UserModule, ValidationModule],
   controllers: [AuthController],
   providers: [
-    LoginIsExistConstraint,
-    EmailIsExistConstraint,
     JwtService,
     PasswordAdapter,
     LocalStrategy,

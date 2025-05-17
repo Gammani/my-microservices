@@ -11,7 +11,7 @@ import {
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { CheckAccessToken } from '../../../common/gurad/jwt-accessToken.guard';
 import { RequestWithUserId } from '../../../common/types/index.d.types';
-import { GetUserQuery } from '../application/queries/get-user.query-handler';
+import { GetUserQuery } from '../application/queries/get-user.query.handler';
 import { UpdateProfileDto } from './model/input/update.profile.dto';
 import { UpdateProfileCommand } from '../application/commands/update-profile.command';
 import { DeleteProfileCommand } from '../application/commands/delete-profile.command';

@@ -2,13 +2,16 @@ import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../entity/user.entity';
+import { BaseRepository } from '../../../shared/repositories/base.repository';
 
 @Injectable()
-export class UserRepository {
+export class UserRepository extends BaseRepository<UserEntity> {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
-  ) {}
+  ) {
+    super(userRepository);
+  }
 
   async findWithPagination({
     searchLoginTerm,
@@ -60,8 +63,8 @@ export class UserRepository {
     }
   }
 
-  async save(newUser: UserEntity) {
-    await newUser.save();
+  async save(newUser: UserEntity): Promise<UserEntity> {
+    return await newUser.save();
   }
 
   async loginIsExist(login: string): Promise<boolean> {
@@ -84,17 +87,5 @@ export class UserRepository {
 
   async delete(userId: string): Promise<void> {
     await this.userRepository.delete({ id: userId });
-  }
-
-  emailIsValid(email: string): boolean {
-    //   const foundUser = await this.dataSource.query(
-    //     `SELECT "id", "login", "email", "createdAt", "passwordHash", "recoveryCode"
-    //   FROM public."UserAccountData"
-    //   WHERE "email" = $1`,
-    //     [email],
-    //   );
-    //   return foundUser.length > 0;
-    // }
-    return true;
   }
 }

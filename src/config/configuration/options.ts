@@ -1,3 +1,6 @@
+import * as dotenv from 'dotenv';
+dotenv.config(); // 👈 обязательно, т.к. этот файл загружается раньше, чем Nest запускает AppModule
+
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 export const options: TypeOrmModuleOptions = {

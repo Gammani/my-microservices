@@ -47,10 +47,10 @@ $ npm run start:prod
 ## Run tests
 
 ```bash
-# unit tests
+# unit __tests__
 $ npm run test
 
-# e2e tests
+# e2e __tests__
 $ npm run test:e2e
 
 # test coverage
