@@ -9,13 +9,20 @@ import { GetUsersQueryHandler } from './application/queries/get-users.query-hand
 import { UsersController } from './api/user.controller';
 import { UserService } from './application/user.service';
 import { GetUserQueryHandler } from '../profile/application/queries/get-user.query.handler';
+import { JwtService } from '../auth/application/jwt.secret';
 
 const useCases = [GetUsersQueryHandler, CreateUserHandler, GetUserQueryHandler];
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserEntity]), SharingModule],
   controllers: [UsersController],
-  providers: [UserService, UserRepository, PasswordAdapter, ...useCases],
+  providers: [
+    UserService,
+    UserRepository,
+    PasswordAdapter,
+    JwtService,
+    ...useCases,
+  ],
   exports: [UserService, UserRepository],
 })
 export class UserModule {}

@@ -4,8 +4,6 @@ export type TokenPayloadType = {
   exp?: number;
 };
 
-export type UserViewModel = {};
-
 export type UserCreateModelType = {
   login: string;
   email: string;
@@ -27,3 +25,19 @@ export type TokensType = {
   accessToken: string;
   refreshToken: string;
 };
+
+export class PaginatedResponseDto<T> {
+  totalCount: number;
+  pageCount: number;
+  pageSize: number;
+  page: number;
+  items: T[];
+
+  constructor(totalCount: number, pageSize: number, items: T[], page: number) {
+    this.totalCount = totalCount;
+    this.pageSize = pageSize;
+    this.pageCount = Math.ceil(totalCount / pageSize);
+    this.page = page;
+    this.items = items;
+  }
+}

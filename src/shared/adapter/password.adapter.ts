@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { Secret } from 'jsonwebtoken';
 import * as jwt from 'jsonwebtoken';
 import { ConfigService } from '@nestjs/config';
-import { TokenPayloadType } from '../../common/types/index.d.types';
+import { TokenPayloadType } from '../../common/types/index.types';
 
 @Injectable()
 export class PasswordAdapter {

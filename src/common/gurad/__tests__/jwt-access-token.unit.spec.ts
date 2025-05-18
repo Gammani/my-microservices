@@ -1,6 +1,6 @@
 import { ExecutionContext, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '../../../modules/auth/application/jwt.secret';
-import { TokenPayloadType } from '../../types/index.d.types';
+import { TokenPayloadType } from '../../types/index.types';
 import { CheckAccessToken } from '../jwt-accessToken.guard';
 
 describe('CheckAccessToken Guard', () => {

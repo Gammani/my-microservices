@@ -8,6 +8,7 @@ import { HttpExceptionFilter } from '../common/exception-filters/http-exception-
 import { useContainer } from 'class-validator';
 import { AppModule } from '../app.module';
 import * as cookieParser from 'cookie-parser';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 // Используем данную функцию в main.ts и в e2e тестах
 export const applyAppSettings = (app: INestApplication) => {
@@ -20,6 +21,26 @@ export const applyAppSettings = (app: INestApplication) => {
 
   app.enableCors();
   app.use(cookieParser());
+
+  const config = new DocumentBuilder()
+    .setTitle('API')
+    .setDescription('Документация API')
+    .setVersion('1.0')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'JWT-auth',
+        description: 'Enter JWT token',
+        in: 'header',
+      },
+      'JWT-auth', // 👈 это ключ, должен совпадать с ApiBearerAuth('JWT-auth')
+    )
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('swagger', app, document);
 };
 
 const setAppPipes = (app: INestApplication) => {
