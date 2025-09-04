@@ -19,12 +19,14 @@ import { ThrottlerGuard } from '@nestjs/throttler';
 import { SwaggerRegistrationEndpoint } from '../../../common/decorators/swagger/registration-endpoint.decorator';
 import { SwaggerLoginEndpoint } from '../../../common/decorators/swagger/login-endpoint.decorator';
 import { AuthInputModel } from './models/input/auth.input.model';
+import { Public } from '../../validation/decorators/validate/public.decorator';
 
 @UseGuards(ThrottlerGuard)
 @Controller('auth')
 export class AuthController {
   constructor(private readonly commandBus: CommandBus) {}
 
+  @Public()
   @Post('register')
   @SwaggerRegistrationEndpoint()
   @HttpCode(HttpStatus.NO_CONTENT)
@@ -32,6 +34,7 @@ export class AuthController {
     await this.commandBus.execute(new CreateUserCommand(createUserModel));
   }
 
+  @Public()
   @UseGuards(LocalAuthGuard)
   @Post('login')
   @SwaggerLoginEndpoint()

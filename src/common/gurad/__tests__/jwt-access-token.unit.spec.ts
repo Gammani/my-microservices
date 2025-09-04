@@ -1,5 +1,5 @@
 import { ExecutionContext, UnauthorizedException } from '@nestjs/common';
-import { JwtService } from '../../../modules/auth/application/jwt.secret';
+import { JwtService } from '../../../shared/jwt/jwt.service';
 import { TokenPayloadType } from '../../types/index.types';
 import { CheckAccessToken } from '../jwt-accessToken.guard';
 

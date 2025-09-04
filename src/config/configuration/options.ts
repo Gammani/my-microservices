@@ -1,16 +1,15 @@
 import * as dotenv from 'dotenv';
-dotenv.config(); // 👈 обязательно, т.к. этот файл загружается раньше, чем Nest запускает AppModule
+dotenv.config();
 
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 export const options: TypeOrmModuleOptions = {
   type: 'postgres',
-  host: 'localhost', // Имя контейнера PostgreSQL из docker-compose.yml
-  port: 5432, // Стандартный порт PostgreSQL
+  host: 'localhost',
+  port: 5432,
   username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD, // Пароль для PostgreSQL
-  database: process.env.DB_NAME, // Название базы данных
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
   autoLoadEntities: true,
-  // entities: [User], // Сюда добавь свои сущности (например, User) или autoLoadEntities: true
-  synchronize: true, // Включает авто-синхронизацию БД (использовать с осторожностью на проде)
+  synchronize: false,
 };

@@ -1,5 +1,5 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { JwtService } from '../jwt.secret';
+import { JwtService } from '../../../../shared/jwt/jwt.service';
 import { TokensType } from '../../../../common/types/index.types';
 
 export class GenerateTokensCommand {

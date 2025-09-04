@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { SharingModule } from '../../shared/sharing.module';
 import { ProfileController } from './api/profile.controller';
-import { JwtService } from '../auth/application/jwt.secret';
+import { JwtService } from '../../shared/jwt/jwt.service';
 import { PasswordAdapter } from '../../shared/adapter/password.adapter';
 import { DeleteProfileHandler } from './application/commands/delete-profile.handler';
 import { UpdateProfileHandler } from './application/commands/update-profile.handler';

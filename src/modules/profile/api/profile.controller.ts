@@ -6,10 +6,8 @@ import {
   HttpCode,
   Patch,
   Req,
-  UseGuards,
 } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { CheckAccessToken } from '../../../common/gurad/jwt-accessToken.guard';
 import { RequestWithUserId } from '../../../common/types/index.types';
 import { GetUserQuery } from '../application/queries/get-user.query.handler';
 import { UpdateProfileDto } from './model/input/update.profile.dto';
@@ -26,14 +24,12 @@ export class ProfileController {
     private readonly commandBus: CommandBus,
   ) {}
 
-  @UseGuards(CheckAccessToken)
   @GetMeEndpoint()
   @Get('me')
   async me(@Req() req: RequestWithUserId): Promise<any> {
     return await this.queryBus.execute(new GetUserQuery(req.userId));
   }
 
-  @UseGuards(CheckAccessToken)
   @SettingsEndpointDecorator()
   @Patch('settings')
   async updateMyProfile(
@@ -43,7 +39,6 @@ export class ProfileController {
     await this.commandBus.execute(new UpdateProfileCommand(req.userId, dto));
   }
 
-  @UseGuards(CheckAccessToken)
   @DeleteProfileEndpointDecorator()
   @Delete('delete')
   @HttpCode(204)

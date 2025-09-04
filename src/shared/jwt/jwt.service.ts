@@ -1,8 +1,8 @@
 import { Secret } from 'jsonwebtoken';
 import { ConfigService } from '@nestjs/config';
 import { Injectable } from '@nestjs/common';
-import { PasswordAdapter } from '../../../shared/adapter/password.adapter';
-import { signAsync } from '../../../common/utils/jwt-sign-async';
+import { PasswordAdapter } from '../adapter/password.adapter';
+import { signAsync } from '../../common/utils/jwt-sign-async';
 
 @Injectable()
 export class JwtService {

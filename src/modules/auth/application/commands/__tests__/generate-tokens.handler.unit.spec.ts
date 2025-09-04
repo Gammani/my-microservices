@@ -2,7 +2,7 @@ import {
   GenerateTokensCommand,
   GenerateTokensHandler,
 } from '../generate-tokens.handler';
-import { JwtService } from '../../jwt.secret';
+import { JwtService } from '../../../../../shared/jwt/jwt.service';
 
 describe('GenerateTokensHandler', () => {
   let handler: GenerateTokensHandler;

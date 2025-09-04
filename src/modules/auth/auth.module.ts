@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { AuthController } from './api/auth.controller';
 import { UserModule } from '../user/user.module';
 import { SharingModule } from '../../shared/sharing.module';
-import { JwtService } from './application/jwt.secret';
+import { JwtService } from '../../shared/jwt/jwt.service';
 import { PasswordAdapter } from '../../shared/adapter/password.adapter';
 import { LocalStrategy } from './strategies/local.strategy';
 import { GenerateTokensHandler } from './application/commands/generate-tokens.handler';

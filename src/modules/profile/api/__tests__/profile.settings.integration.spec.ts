@@ -3,7 +3,7 @@ import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from '../../../../app.module';
 import { DataSource } from 'typeorm';
-import { JwtService } from '../../../auth/application/jwt.secret';
+import { JwtService } from '../../../../shared/jwt/jwt.service';
 import { UserRepository } from '../../../user/repositories/user.repository';
 import { UserEntity } from '../../../user/entity/user.entity';
 import { PasswordAdapter } from '../../../../shared/adapter/password.adapter';

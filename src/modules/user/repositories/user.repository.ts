@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { IsNull, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../entity/user.entity';
 import { BaseRepository } from '../../../shared/repositories/base.repository';
@@ -33,6 +33,7 @@ export class UserRepository extends BaseRepository<UserEntity> {
     }
 
     queryBuilder
+      .andWhere('user.deletedAt IS NULL')
       .orderBy('user.createdAt', sortDirection.toUpperCase() as 'ASC' | 'DESC')
       .skip((pageNumber - 1) * pageSize)
       .take(pageSize);
@@ -44,6 +45,7 @@ export class UserRepository extends BaseRepository<UserEntity> {
     return this.userRepository
       .createQueryBuilder('user')
       .where('user.id = :userId', { userId })
+      .andWhere('user.deletedAt IS NULL')
       .getOne();
   }
 
@@ -55,6 +57,7 @@ export class UserRepository extends BaseRepository<UserEntity> {
       .where('user.email = :loginOrEmail OR user.login = :loginOrEmail', {
         loginOrEmail,
       })
+      .andWhere('user.deletedAt IS NULL')
       .getOne();
     if (foundUser) {
       return foundUser;
@@ -71,6 +74,7 @@ export class UserRepository extends BaseRepository<UserEntity> {
     const foundUser = await this.userRepository.find({
       where: {
         login: login,
+        deletedAt: IsNull(),
       },
     });
     return foundUser.length <= 0;
@@ -80,12 +84,21 @@ export class UserRepository extends BaseRepository<UserEntity> {
     const foundUser = await this.userRepository.find({
       where: {
         email: email,
+        deletedAt: IsNull(),
       },
     });
     return foundUser.length <= 0;
   }
 
   async delete(userId: string): Promise<void> {
+    await this.userRepository.softDelete({ id: userId });
+  }
+
+  async restore(userId: string): Promise<void> {
+    await this.userRepository.restore({ id: userId });
+  }
+
+  async hardDelete(userId: string): Promise<void> {
     await this.userRepository.delete({ id: userId });
   }
 }

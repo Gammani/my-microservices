@@ -18,10 +18,6 @@ export abstract class BaseRepository<T extends ObjectLiteral> {
     await this.repo.update(id, data);
   }
 
-  async delete(id: string): Promise<void> {
-    await this.repo.delete(id);
-  }
-
   async findById(id: string): Promise<T | null> {
     return await this.repo.findOne({ where: { id } as any });
   }

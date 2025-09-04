@@ -4,6 +4,7 @@ import {
   IsNumber,
   IsOptional,
   IsString,
+  Length,
   Matches,
   Min,
 } from 'class-validator';
@@ -49,7 +50,7 @@ export class CreateUserModel {
   })
   @Type(() => Number) // <--- это преобразует строку в число
   @IsNumber()
-  @Min(1)
+  @Min(18)
   age: number;
 
   @ApiProperty({
@@ -58,6 +59,6 @@ export class CreateUserModel {
   })
   @Trim()
   @IsString()
-  @IsOptional()
+  @Length(25, 5000)
   description: string;
 }

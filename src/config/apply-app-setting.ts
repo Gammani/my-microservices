@@ -10,12 +10,9 @@ import { AppModule } from '../app.module';
 import * as cookieParser from 'cookie-parser';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
-// Используем данную функцию в main.ts и в e2e тестах
 export const applyAppSettings = (app: INestApplication) => {
-  // для кастомных декораторов
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
-  // глобальные настройки
   setAppPipes(app);
   setAppExceptionFilters(app);
 
@@ -35,7 +32,7 @@ export const applyAppSettings = (app: INestApplication) => {
         description: 'Enter JWT token',
         in: 'header',
       },
-      'JWT-auth', // 👈 это ключ, должен совпадать с ApiBearerAuth('JWT-auth')
+      'JWT-auth',
     )
     .build();
 

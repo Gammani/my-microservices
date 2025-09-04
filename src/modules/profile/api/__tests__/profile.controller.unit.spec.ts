@@ -5,7 +5,7 @@ import { UpdateProfileDto } from '../model/input/update.profile.dto';
 import { GetUserQuery } from '../../application/queries/get-user.query.handler';
 import { UpdateProfileCommand } from '../../application/commands/update-profile.command';
 import { DeleteProfileCommand } from '../../application/commands/delete-profile.command';
-import { JwtService } from '../../../auth/application/jwt.secret';
+import { JwtService } from '../../../../shared/jwt/jwt.service';
 
 describe('ProfileController', () => {
   let controller: ProfileController;
