@@ -6,7 +6,7 @@ import * as request from 'supertest';
 import { AppModule } from '../../../../app.module';
 import { DataSource } from 'typeorm';
 import { UserRepository } from '../../../user/repositories/user.repository';
-import { applyAppSettings } from '../../../../config/apply-app-setting'; // 👈 импортируем applyAppSettings
+import { applyAppSettings } from '../../../../common/utils/apply-app-setting'; // 👈 импортируем applyAppSettings
 
 describe('POST /auth/register (Integration)', () => {
   let app: INestApplication;

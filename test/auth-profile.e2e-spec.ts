@@ -3,7 +3,7 @@ import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
 import { CreateUserModel } from '../src/modules/auth/api/models/input/create.user.model';
 import { AppModule } from '../src/app.module';
-import { applyAppSettings } from '../src/config/apply-app-setting';
+import { applyAppSettings } from '../src/common/utils/apply-app-setting';
 import { TestingUtilsService } from '../src/common/utils/testing-utils.service';
 import { TestingUtilsModule } from '../src/common/utils/testing-utils.module';
 

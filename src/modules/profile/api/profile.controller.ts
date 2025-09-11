@@ -8,6 +8,7 @@ import {
   Req,
 } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
+
 import { RequestWithUserId } from '../../../common/types/index.types';
 import { GetUserQuery } from '../application/queries/get-user.query.handler';
 import { UpdateProfileDto } from './model/input/update.profile.dto';

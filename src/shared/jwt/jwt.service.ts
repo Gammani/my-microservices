@@ -16,7 +16,7 @@ export class JwtService {
       { userId },
       this.configService.get('JWT_ACCESS_SECRET') as Secret,
       {
-        expiresIn: '5m',
+        expiresIn: '50m',
       },
     );
   }

@@ -8,6 +8,7 @@ import { ProfileModule } from './modules/profile/profile.module';
 import { APP_GUARD } from '@nestjs/core';
 import { CheckAccessToken } from './common/gurad/jwt-accessToken.guard';
 import { JwtModule } from './shared/jwt/jwt.module';
+import { ContentModule } from './modules/content/content.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { JwtModule } from './shared/jwt/jwt.module';
     UserModule,
     AuthModule,
     ProfileModule,
+    ContentModule,
   ],
   controllers: [],
   providers: [

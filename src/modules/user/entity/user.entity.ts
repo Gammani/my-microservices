@@ -4,8 +4,11 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { ContentEntity } from '../../content/entity/content.entity';
 
 @Entity({ name: 'user' })
 export class UserEntity extends BaseEntity {
@@ -40,4 +43,13 @@ export class UserEntity extends BaseEntity {
     nullable: true,
   })
   deletedAt: Date | null;
+
+  @OneToOne(() => ContentEntity, (content) => content.user, {
+    cascade: ['insert', 'update'], // сохранять контент вместе с юзером при привязке
+    nullable: true, // аватар необязателен
+    onDelete: 'SET NULL', // удалили контент — у юзера ссылка станет NULL
+    eager: false,
+  })
+  @JoinColumn({ name: 'avatar_content_id' })
+  avatarContent?: ContentEntity;
 }

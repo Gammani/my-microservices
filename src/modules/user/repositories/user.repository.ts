@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { IsNull, Repository } from 'typeorm';
+import { IsNull, Repository, SelectQueryBuilder } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../entity/user.entity';
 import { BaseRepository } from '../../../shared/repositories/base.repository';
+import { ContentEntity } from '../../content/entity/content.entity';
 
 @Injectable()
 export class UserRepository extends BaseRepository<UserEntity> {
@@ -24,7 +25,8 @@ export class UserRepository extends BaseRepository<UserEntity> {
     pageNumber: number;
     pageSize: number;
   }): Promise<[UserEntity[], number]> {
-    const queryBuilder = this.userRepository.createQueryBuilder('user');
+    const queryBuilder: SelectQueryBuilder<UserEntity> =
+      this.userRepository.createQueryBuilder('user');
 
     if (searchLoginTerm) {
       queryBuilder.where('user.login ILIKE :search', {
@@ -66,8 +68,23 @@ export class UserRepository extends BaseRepository<UserEntity> {
     }
   }
 
+  async foundUserWithAvatar(accountId: string): Promise<UserEntity | null> {
+    return await this.userRepository.findOne({
+      where: { id: accountId },
+      relations: ['avatarContent'], // << ВАЖНО: подгружаем аватарку!
+    });
+  }
+
   async save(newUser: UserEntity): Promise<UserEntity> {
     return await newUser.save();
+  }
+
+  async attachAvatar(
+    user: UserEntity,
+    content: ContentEntity,
+  ): Promise<UserEntity> {
+    user.avatarContent = content;
+    return await this.userRepository.save(user);
   }
 
   async loginIsExist(login: string): Promise<boolean> {
