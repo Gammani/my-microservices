@@ -40,7 +40,8 @@ describe('POST /auth/register (Integration)', () => {
       email: 'integration_user@example.com',
       password: 'testpassword123',
       age: 28,
-      description: 'Test registration',
+      description:
+        'Just a test user with a many many many many many many words',
     };
 
     await request(app.getHttpServer())

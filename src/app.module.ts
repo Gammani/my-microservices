@@ -9,6 +9,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { CheckAccessToken } from './common/gurad/jwt-accessToken.guard';
 import { JwtModule } from './shared/jwt/jwt.module';
 import { ContentModule } from './modules/content/content.module';
+import { WalletModule } from './modules/wallet/wallet.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ContentModule } from './modules/content/content.module';
     AuthModule,
     ProfileModule,
     ContentModule,
+    WalletModule,
   ],
   controllers: [],
   providers: [

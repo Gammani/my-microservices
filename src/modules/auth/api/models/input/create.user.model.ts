@@ -2,7 +2,6 @@ import { Trim } from '../../../../validation/decorators/transform/trim';
 import {
   IsNotEmpty,
   IsNumber,
-  IsOptional,
   IsString,
   Length,
   Matches,

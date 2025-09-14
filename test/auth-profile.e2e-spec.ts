@@ -15,7 +15,7 @@ const userDto: CreateUserModel = {
   password: '123456',
   email: 'test@example.com',
   age: 25,
-  description: 'Just a test user',
+  description: 'Just a test user with a many many many many many many words',
 };
 
 let testingUtilsService: TestingUtilsService;

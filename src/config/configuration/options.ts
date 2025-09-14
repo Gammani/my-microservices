@@ -1,5 +1,13 @@
 import * as dotenv from 'dotenv';
-dotenv.config();
+
+const envFile =
+  process.env.NODE_ENV === 'test'
+    ? '.env.test'
+    : process.env.NODE_ENV === 'production'
+      ? '.env.production'
+      : '.env';
+
+dotenv.config({ path: envFile });
 
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 

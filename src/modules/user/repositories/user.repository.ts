@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IsNull, Repository, SelectQueryBuilder } from 'typeorm';
+import { EntityManager, IsNull, Repository, SelectQueryBuilder } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../entity/user.entity';
 import { BaseRepository } from '../../../shared/repositories/base.repository';
@@ -105,6 +105,34 @@ export class UserRepository extends BaseRepository<UserEntity> {
       },
     });
     return foundUser.length <= 0;
+  }
+
+  async findByIdForUpdate(
+    userId: string,
+    manager: EntityManager,
+  ): Promise<UserEntity | null> {
+    return manager
+      .getRepository(UserEntity)
+      .createQueryBuilder('user')
+      .setLock('pessimistic_write')
+      .where('user.id = :id', { id: userId })
+      .andWhere('user.deletedAt IS NULL')
+      .getOne();
+  }
+
+  async updateBalance(
+    userId: string,
+    amount: number,
+    op: 'add' | 'subtract',
+    manager: EntityManager,
+  ): Promise<void> {
+    await manager
+      .getRepository(UserEntity)
+      .createQueryBuilder()
+      .update()
+      .set({ balance: () => `"balance" ${op === 'add' ? '+' : '-'} :amount` })
+      .where('id = :id', { id: userId, amount })
+      .execute();
   }
 
   async delete(userId: string): Promise<void> {

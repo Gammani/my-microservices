@@ -27,6 +27,9 @@ export class UserEntity extends BaseEntity {
   @Column({})
   description: string;
 
+  @Column({ type: 'numeric', precision: 12, scale: 2, default: 0 })
+  balance: string;
+
   @CreateDateColumn({
     nullable: false,
     type: 'timestamp with time zone',
