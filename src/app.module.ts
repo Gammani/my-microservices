@@ -10,6 +10,7 @@ import { CheckAccessToken } from './common/gurad/jwt-accessToken.guard';
 import { JwtModule } from './shared/jwt/jwt.module';
 import { ContentModule } from './modules/content/content.module';
 import { WalletModule } from './modules/wallet/wallet.module';
+import { ResetBalanceModule } from './modules/reset-balance/reset-balance.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { WalletModule } from './modules/wallet/wallet.module';
     ProfileModule,
     ContentModule,
     WalletModule,
+    ResetBalanceModule,
   ],
   controllers: [],
   providers: [

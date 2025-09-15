@@ -27,6 +27,15 @@ services:
     networks:
       - mynetwork  # Добавляем в сеть для связи с приложением
 
+  redis:
+    image: redis:7.2-alpine   # можно latest/alpine: меньше вес
+    container_name: redis-container
+    ports:
+      - "6379:6379"   # Открываем порт
+    networks:
+      - mynetwork     # Подключаем к той же сети, чтобы приложение могло коннектиться через host: 'redis'
+
+
 volumes:
   minio_storage:
   postgres_data:  # Том для хранения данных БД (чтобы они не удалялись при перезапуске контейнера)
