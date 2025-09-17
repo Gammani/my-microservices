@@ -4,12 +4,14 @@ import { CommandBus } from '@nestjs/cqrs';
 import { TransferDto } from './models/input/transfer.input.model';
 import { AccountId } from '../../validation/decorators/validate/accountId.decorator';
 import { TransferMoneyCommand } from '../application/commands/transfer-money.command';
+import { TransferEndpointDecorator } from '../../../common/decorators/swagger/transfer-endpoint.decorator';
 
 @Controller('wallet')
 export class WalletController {
   constructor(private readonly commandBus: CommandBus) {}
 
   @Post('transfer')
+  @TransferEndpointDecorator()
   async transfer(@AccountId() accountId: string, @Body() dto: TransferDto) {
     await this.commandBus.execute(new TransferMoneyCommand(accountId, dto));
     return { status: 'ok' };
